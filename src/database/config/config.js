@@ -1,24 +1,24 @@
 module.exports = {
 	development: {
-		username: 'root',
-		password: 'root',
-		database: 'libreriadb',
-		host: '127.0.0.1',
+		username: 'b62f975c7f095c',
+		password: '633bdf96',
+		database: 'heroku_36738dc3cd50ffe',
+		host: 'us-cdbr-east-02.cleardb.com',
 		dialect: 'mysql',
 		paranoid: 'true'
 	} /*
 	test: {
-		username: 'root',
-		password: null,
-		database: 'database_test',
-		host: '127.0.0.1',
+		username: 'b62f975c7f095c',
+		password: 633bdf96,
+		database: 'heroku_36738dc3cd50ffe',
+		host: 'us-cdbr-east-02.cleardb.com',
 		dialect: 'mysql'
 	},
 	production: {
-		username: 'root',
-		password: null,
-		database: 'database_production',
-		host: '127.0.0.1',
+		username: 'b62f975c7f095c',
+		password: 633bdf96,
+		database: 'heroku_36738dc3cd50ffe',
+		host: 'us-cdbr-east-02.cleardb.com,
 		dialect: 'mysql'
 	}*/
 };
