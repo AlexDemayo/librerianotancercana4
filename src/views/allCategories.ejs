@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+    <%- include('partials/head', {title: 'Libros'}) %>
+<body>
+   
+    <%- include('partials/header') %>
+  
+    <main>
+       <div class="container body-container">
+           <div class="row">
+               <section class="col-12">
+                    <ul class="route">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/category">Categorías</a></li>
+                    </ul>
+                    <button onclick="topFunction()" id="scrollButton" title="top"><i class="fas fa-arrow-up"></i></button>
+               </section>
+               <section class="col-12">
+                   <ul class="categories">
+                       <li><a href="/category/arte">Arte</a></li>
+                       <li><a href="/category/crónica">Crónica</a></li>
+                       <li><a href="/category/ensayo">Ensayo</a></li>
+                       <li><a href="/category/infantil+y+juvenil">Infantil y juvenil</a></li>
+                       <li><a href="/category/narrativa">Narrativa</a></li>
+                       <li><a href="/category/novelas+gráficas+y+cómics">Novelas gráficas y cómics</a></li>
+                       <li><a href="/category/poesía">Poesía</a></li>
+                   </ul>
+               </section>
+                <% books.forEach(book => { %>
+                    <div class="col-6 col-md-3">
+                        <section class="book-container">
+                           <figure class="image-container">
+                            <a href="/books/<%=book.id%>">
+                                <img src="/images/books/<%=book.image %>" alt="book photo"> 
+                            </a>
+                           </figure>
+                            <h3><a class="categories-book-title" href="/books/<%=book.id%>"><%= book.title %></a></h3>
+                            <p>$<%= book.price %></p>                            
+                        </section>
+                    </div>       
+                <% }) %>
+           </div>
+       </div>
+    </main>
+  
+  
+    <%- include('partials/footer') %>
+    <script src="/js/scrollUp.js"></script>
+</body>
+
+</html>

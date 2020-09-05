@@ -1,0 +1,269 @@
+<html>
+<%- include('partials/head', {title: 'Mi Perfil'}) %>
+
+<body>
+
+  <%- include('partials/header') %>
+
+  <div class="container">
+    <div id="flex" class="row space">
+      <div class="col-12 col-md-4 col-lg-2 profile-confg">
+
+        <div class="profile-div">
+          <img class="profile-img" src="/images/users/<%= user.image %>">
+        </div>
+
+        <!-- <form action="user/updateImg" method="POST" enctype="multipart/form-data">
+                      <div class="uk-form-custom">
+                        <input type="file">
+                        <button type="button" class="w3-button w3-large w3-circle buttcf">+</button>
+                      </div>
+                    </form> -->
+
+      <% if (locals.user.admin ) { %>
+        <div class="menu-profile margin">
+          <a class="a-profile" id="cargar-producto" href="/books/create">Cargar Producto</a>
+        </div>
+        <div class="menu-profile js-c">
+          <a class="a-profile">Autor del mes</a>
+        </div>
+        <div class="menu-profile js-d">
+          <a class="a-profile" id="recommended-categories-bttn">Categorías recomendadas</a>
+        </div>
+      <% } %> 
+        <div class="menu-profile js-a">
+          <a class="a-profile" id="config">Configuración</a>
+        </div>
+        <div class="menu-profile js-b">
+            <a class="a-profile" id="config">Cambiar contraseña</a>
+        </div>
+        <% if (!locals.user.admin ) { %>
+        <div class="menu-profile">
+          <a class="a-profile" href="/users/shoppingHistory">Compras</a>
+        </div>
+        <% } %> 
+        <!-- <div class="menu-profile">
+          <a class="a-profile" href="#">Favoritos</a>
+        </div> -->
+
+
+
+      </div>
+
+      <div class="col-12 col-md-5 col-lg-7 user-info">
+        <p class="p-profile marginpf">Usuario</p>
+        <div class="user-div">
+          <div class="user-img">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="user-menu">
+            <%= user.userName %>
+          </div>
+        </div>
+        <p class="p-profile marginpf1">Email</p>
+        <div class="user-div">
+          <div class="user-img">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="user-menu">
+            <%= user.email %>
+          </div>
+        </div>
+        <p class="p-profile marginpf1">Contraseña</p>
+        <div class="user-div">
+          <div class="user-img">
+            <i class="fas fa-key"></i>
+          </div>
+          <div class="user-menu">
+            ****************
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-12 col-md-5 col-lg-7 user-info-config" style="display:none">
+
+        <form id ="configForm-js" class="update register edit-pf-form img-js" action="/users/updateUser" method="POST" value="update"
+          enctype="multipart/form-data">
+
+          <p class="p-profile marginpf edit-form-p">Usuario</p>
+          <div class="user-div form-C">
+            <div class="div-img user-img">
+              <i class="fas fa-user"></i>
+            </div>
+            <input type="text" id="user-C" name="userName" class="user-menu user-cf" value="<%= typeof old == "undefined" ? user.userName : old.userName %>">
+            <i class="fas fa-check-circle config"></i>
+            <i class="fas fa-exclamation-circle config"></i>
+            <small>Error message</small>
+            
+          </div>
+          <p class="error-back"><%= typeof errors == 'undefined' ? null : errors.userName ? errors.userName.msg : null %></p>
+
+          <p class="p-profile marginpf edit-form-p">Email</p>
+          <div class="user-div form-C">
+            <div class="user-img">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <input type="text" id="email-C" name="email" class="user-menu email-cf" value="<%= typeof old == "undefined" ? user.email : old.email %>">
+            <i class="fas fa-check-circle config"></i>
+            <i class="fas fa-exclamation-circle config"></i>
+            <small>Error message</small>
+          </div>
+          <p class="error-back"><%= typeof errors == 'undefined' ? null : errors.email ? errors.email.msg : null %></p>
+
+          <p class="p-profile marginpf edit-form-p">Contraseña</p>     
+          <div class="user-div form-C">
+            <div class="user-img">
+              <i class="fas fa-key"></i>
+            </div>
+            <input type="password" id="password-C" name="password" class="user-menu password-cf">
+            <i class="fas fa-check-circle config"></i>
+            <i class="fas fa-exclamation-circle config"></i>
+            <small>Error message</small>
+          </div>
+          <p class="error-back"><%= typeof errors == 'undefined' ? null : errors.password ? errors.password.msg : null %></p>
+
+          
+          <div class="form-C">
+
+            <input type="file" name="image" class="avatar-input img-cf" id="avatar-input-edit">
+            <small>Error message</small>
+          </div>
+         
+          <div>
+            <button type="submit" id="button-user-form">Actualizar</button>
+          </div>
+        </form>
+        <form action="deleteUser/<%= user.id %> " method="POST">
+          <button type="submit" class="elm-button">Eliminar cuenta</button>
+        </form>
+
+
+        
+    </div>
+       
+
+    <div class="col-12 col-md-5 col-lg-7 user-password-config" style="display:none">
+
+        <form id="passwordForm-js"class="update register edit-pf-form " action="/users/updatePassword" method="POST" value="update">
+
+        
+          <p class="p-profile marginpf edit-form-p">Contraseña</p>     
+          <div class="user-div form-C">
+            <div class="user-img">
+              <i class="fas fa-key"></i>
+            </div>
+            <input type="password" id="password-P" name="password" class="user-menu password-cf">
+            <i class="fas fa-check-circle config"></i>
+            <i class="fas fa-exclamation-circle config"></i>
+            <small>Error message</small>
+          </div>
+          <p class="error-back"><%= typeof errors == 'undefined' ? null : errors.password ? errors.password.msg : null %></p>
+
+          <p class="p-profile marginpf edit-form-p">Nueva contraseña</p>
+          <div class="user-div form-C">
+            <div class="user-img">
+              <i class="fas fa-key"></i>
+            </div>
+            <input type="password" id="newPassword-P" name="newPassword" class="user-menu newpassword-cf">
+            <i class="fas fa-check-circle config"></i>
+            <i class="fas fa-exclamation-circle config"></i>
+            <small>Error message</small>
+          </div>
+          <p class="error-back"><%= typeof errors == 'undefined' ? null : errors.newPassword ? errors.newPassword.msg : null %></p>
+
+
+          <p class="p-profile marginpf edit-form-p">Repetir nueva contraseña</p>
+          <div class="user-div form-C">
+            <div class="user-img">
+              <i class="fas fa-key"></i>
+            </div>
+            <input type="password" id="newPassword2-P" name="confirmNewPassword" class="user-menu repassword-cf">
+            <i class="fas fa-check-circle config"></i>
+            <i class="fas fa-exclamation-circle config"></i>
+            <small>Error message</small>
+          </div>
+          <p class="error-back"><%= typeof errors == 'undefined' ? null : errors.confirmNewPassword ? errors.confirmNewPassword.msg : null %></p> 
+          
+          <div>
+            <button type="submit" id="button-password-form">Actualizar</button>
+          </div>
+        </form>
+       
+  </div>
+
+  <div class="col-12 col-md-5 col-lg-7 monthy-author-div" style="display:none">
+
+    <form class="update register edit-pf-form monthly-author-form" action="/users/monthlyAuthor" method="POST" enctype="multipart/form-data">
+
+    
+      <p class="p-profile marginpf edit-form-p">Nombre del autor</p>     
+      <div class="user-div form-C">
+        <div class="user-img">
+          <i class="fas fa-user"></i>
+        </div>
+        <input type="text" id="authorName" name="name" class="user-menu">
+        <i class="fas fa-check-circle config"></i>
+        <i class="fas fa-exclamation-circle config"></i>
+        
+      </div>
+      <p class="error-back"><%= typeof errors == 'undefined' ? null : errors.name ? errors.name.msg : null %></p>
+
+      <p class="p-profile marginpf edit-form-p">Imagen</p>
+      <div class="user-div">
+        
+        <input class="margin-img"type="file" id="image" name="image">
+        
+      </div>
+      <p class="error-back"><%= typeof errors == 'undefined' ? null : errors.newPassword ? errors.newPassword.msg : null %></p>
+
+      
+      <div>
+        <button type="submit" id="button-author-form">Actualizar</button>
+      </div>
+    </form>
+   
+  </div>
+
+  <div class="col-12 col-md-5 col-lg-7 user-password-config recommended-categories-div" style="display:none">
+
+    <form class="form1 update register edit-pf-form recommended-categories-form " action="/category/recommended" method="POST" name="recommended">
+
+    
+      <p class="p-profile marginpf edit-form-p marginR">Elegí las categorías recomendadas</p>     
+        
+      
+        <% categories.forEach(elem => { %>
+         <div class="checkboxdiv">
+          <label class="style-label category-checkbox-label" for="categoria"><%= elem.name %></label>
+          <input class="category-input" type="checkbox" name="category" <%= elem.recommended && "checked" %> id="<%= elem.id %>" value="<%= elem.id %>">
+        </div>
+        <% }) %>
+        
+      
+      <!-- <p class="error-back"><%= typeof errors == 'undefined' ? null : errors.newPassword ? errors.newPassword.msg : null %></p> -->
+
+      
+      <div>
+        <small id="frontMsg">*No podes elegir mas de 3 categorias ! </small>
+        <button type="submit" id="button-categories-form">Actualizar</button>
+      </div>
+    
+    </form>
+   
+  </div>
+
+ </div>
+</div>
+  <%- include('partials/footer') %>
+
+
+  <script src="/js/userEvent.js"></script>
+  <script src="/js/userValidations.js"></script>
+  <script src="/js/passwordEvent.js"></script>
+  <script src="/js/passwordValidations.js"></script>
+  <script src="/js/updateAuthorEvent.js"></script>
+  <script src="/js/recommendedCategories.js"></script>
+</body>
+
+</html>

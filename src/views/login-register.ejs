@@ -1,0 +1,108 @@
+
+<html>
+    <%- include('partials/head', {title: 'Ingresar'}) %>
+<body>
+   
+    <%- include('partials/header') %>
+ 
+
+    <div class="container">
+        <div id="flex" class="row space">
+            <div class="col-12 col-md-5 col-lg-5 form-left">
+                <h2>Iniciar sesión</h2>
+                <form  id ="loginForm-js" class="login session-save"  action="login" method="POST" value="login">
+                    <div class= "form-L">
+                        <label for="username"></label>
+                        <input type="email" id="email-L"  name="emailLog" class="form-input log-email" value="<%= typeof oldLogin == "undefined" ? null : oldLogin.emailLog %>" placeholder="Email">
+                        <i class="fas fa-check-circle " ></i>
+                        <i class="fas fa-exclamation-circle" ></i>
+                        <small>Error message</small>
+                        <p ><%= typeof errorsLogin == 'undefined' ? null : errorsLogin.emailLog ? errorsLogin.emailLog.msg : null %></p>
+                    </div>
+                    <div class= "form-L">
+                        <label for="username"></label>
+                        <input type="password" id="password-L"  name="passwordLog" class="form-input log-pass " value="" placeholder="Contraseña">
+                        <i class="fas fa-check-circle" ></i>
+                        <i class="fas fa-exclamation-circle" ></i>
+                        <small>Error message</small>
+                        <p ><%= typeof errorsLogin == 'undefined' ? null : errorsLogin.passwordLog ? errorsLogin.passwordLog.msg : null %></p>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="remember" name="remember" class="form-check log-repass">
+                        <label for="remember" class="form-label">Recuérdame</label>
+                    </div>
+                    <div>
+                        <div class= errores>
+                            <ul>
+        
+                            </ul>
+                        </div>
+                        <button type="submit">Iniciar sesión</button>  
+                    </div>
+                </form>
+            </div>
+            <div class="col-12 col-md-5 col-lg-5 form-right">
+                <h2>Registrate</h2>
+                <form id ="registerForm-js"class="register regformulario-js" action="register" method="POST" value="register" enctype="multipart/form-data">
+                    <div>
+                        <div class= "form-L">
+                            <input type="text" id="user-R" name="userName" placeholder="Usuario *" class="form-input " value="<%= typeof oldRegister == "undefined" ? null : oldRegister.userName %>">
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle "></i>
+                            <small>Error message</small>
+                            <p ><%= typeof errorsRegister == 'undefined' ? null : errorsRegister.userName ? errorsRegister.userName.msg : null %></p>
+                        </div>
+                        <div class= "form-L">
+                            <input type="text" id="email-R" name="email" placeholder="Email *" class="form-input " value="<%= typeof oldRegister == "undefined" ? null : oldRegister.email %>">
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error message</small>
+                            <p ><%= typeof errorsRegister == 'undefined' ? null : errorsRegister.email ? errorsRegister.email.msg : null %></p>
+                        </div>
+                        <div class= "form-L">
+                            <input type="password" id="password-R" name="password" class="form-input " placeholder="Contraseña *">
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error message</small>
+                            <p ><%= typeof errorsRegister == 'undefined' ? null : errorsRegister.password ? errorsRegister.password.msg : null %></p>
+                        </div>
+                        <div class= "form-L">
+                            <input type="password" id="password2-R" name="confirmPassword" class="form-input " placeholder="Repita la contraseña: *">
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error message</small>
+                            <p ><%= typeof errorsRegister == 'undefined' ? null : errorsRegister.confirmPassword ? errorsRegister.confirmPassword.msg : null %></p>
+                        </div>
+                        <div class= "form-L ">
+                            <label class="avatar-label" name="image">Imagen de perfil</label>
+                            <input id="img-R "type="file" name="image" class="avatar-input reg-img">
+                            <small>Error message</small>
+                            <p ><%= typeof errorsRegister == 'undefined' ? null : errorsRegister.image ? errorsRegister.image.msg : null %></p>
+                        </div>
+                        <div>
+                            <p>(*) Campos obligatorios.</p>
+                        </div>
+                        <div>
+                            <div class= erroresR>
+                                <ul>
+            
+                                </ul>
+                            </div>
+                            <button class="js-registerEvent"type="submit">Registrate</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <%- include('partials/footer') %>
+   
+    <script src="/js/registerValidations.js"></script>
+    <script src="/js/loginValidations.js"></script>
+    <script src="/js/sessionStorage.js"></script>
+    <script src="/js/sweetAlerts.js"></script>
+  </body>
+
+</html>
+

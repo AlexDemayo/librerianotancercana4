@@ -1,0 +1,138 @@
+<html>
+    <%- include('partials/head', {title: 'Editar libro'}) %>
+    <link rel="stylesheet" href="/stylesheets/create-edit.css">
+<body>
+    <%- include('partials/header') %>
+    
+    <div class="container -container">
+        <div class="row space">
+            <h2 class="col-12">Editar libro</h2>
+            <form action="/books/edit/<%= book.id %>" method="POST" class="form" enctype="multipart/form-data">
+                <div class="container">
+                    <div class="row">
+                        <div class="section col-12 col-md-6">
+                            <label for="title">Título:</label>
+                            <input type="text" name="title" class="input" value="<%= typeof old == "undefined" ? book.title : old.title %>">
+                            <p class="error"><%= typeof errors == 'undefined' ? null : errors.title ? errors.title.msg : null %></p>
+                        </div>
+                        <div class="section col-12 col-md-6">
+                            <label for="author">Autor:</label>
+                            <input type="text" name="author" class="input" value="<%= typeof old == "undefined" ? book.author : old.author %>">
+                            <p class="error"><%= typeof errors == 'undefined' ? null : errors.author ? errors.author.msg : null %></p>
+                        </div>
+                        <div class="section col-12 col-md-6">
+                            <label for="publisher">Editorial:</label>
+                            <select name="publisher" class="input">
+                                <% publishers.forEach(publisher => { %>
+                                    <% if (typeof old != 'undefined') { %>
+                                        <% if (old.publisher == publisher.id) { %>
+                                          <option value="<%= publisher.id %>" selected><%= publisher.name %></option>
+                                        <% } else {%>
+                                          <option value="<%= publisher.id %>"><%= publisher.name %></option>
+                                        <% } %> 
+                                      <% } else { %>
+                                        <% if (publisher.id == book.publisherId) { %>
+                                            <option value="<%= publisher.id %>" selected><%= publisher.name %> </option>
+                                        <% } else { %>
+                                            <option value="<%= publisher.id %> "><%= publisher.name %> </option>
+                                        <% } %>
+                                    <% } %> 
+                                <% }) %>
+                            </select>
+                            <p class="error"><%= typeof errors == 'undefined' ? null : errors.publisher ? errors.publisher.msg : null %></p>
+                        </div>
+                        <div class="section col-12 col-md-6">
+                            <label for="datePublished">Fecha de publicación:</label>
+                            <input type="date" name="datePublished" class="input" value='<%= typeof old == 'undefined' ? book.datePublished : old.datePublished%>'>
+                            <p class="error"><%= typeof errors == 'undefined' ? null : errors.datePublished ? errors.datePublished.msg : null %></p>
+                        </div>
+                        <div class="section col-12 col-md-6">
+                            <label for="category">Categoría:</label>
+                            <select name="category" class="input selectCategory">
+                                <% categories.forEach(category => { %>
+                                    <% if(typeof old != 'undefined') { %>
+                                        <% if (old.category == category.id) { %>
+                                            <option value="<%= category.id %>" selected> <%= category.name %> </option>
+                                        <% } else { %>
+                                            <option value="<%= category.id %>"> <%= category.name %> </option>
+                                        <% } %>
+                                    <% } else {%>     
+                                        <% if (category.id == book.categoryId) { %>
+                                            <option value="<%= category.id %>" selected><%= category.name %></option>
+                                        <% } else { %>
+                                            <option value="<%= category.id %>"><%= category.name %></option>
+                                        <% } %>
+                                    <% } %>
+                                <% }) %>
+                            </select>
+                            <p class="error"><%= typeof errors == 'undefined' ? null : errors.category ? errors.category.msg : null %></p>
+                        </div>
+                        <div class="section col-12 col-md-6">
+                            <label for="subCategory">Sub categoría:</label>
+                            <select name="subCategory" class="input selectSubCategories">
+                                <% subCategories.forEach(subCategory => { %>
+                                    <% if(typeof old != 'undefined') { %>
+                                        <% if (old.subCategory == subCategory.id) { %>
+                                            <option value="<%= subCategory.id %>" selected> <%= subCategory.name %> </option>
+                                        <% } else { %>
+                                            <option value="<%= subCategory.id %>"> <%= subCategory.name %> </option>
+                                        <% } %>
+                                    <% } else {%>
+                                        <% if (subCategory.id == book.subCategoryId) { %>
+                                            <option value="<%= subCategory.id%>" selected> <%= subCategory.name %> </option>
+                                        <% } else { %>
+                                            <option value="<%= subCategory.id%>"> <%= subCategory.name %> </option>
+                                        <% } %>
+                                    <% } %>
+                                <% }) %>
+                            </select>
+                            <p class="error"><%= typeof errors == 'undefined' ? null : errors.subCategory ? errors.subCategory.msg : null %></p>        
+                        </div>
+                        <div class="section col-12 col-md-6">
+                            <label for="pages">Número de páginas:</label>
+                            <input type="number" class="input" name="pages" value='<%= typeof old == "undefined" ? book.pages : old.pages%>'>
+                            <p class="error"><%= typeof errors == 'undefined' ? null : errors.pages ? errors.pages.msg : null %></p>
+                        </div>
+                        <div class="section col-12 col-md-6">
+                            <label for="cover">Tipo de tapa:</label>
+                            <input type="text" class="input" name="cover" value='<%= typeof old == "undefined" ? book.cover : old.cover%>'>
+                            <p class="error"><%= typeof errors == 'undefined' ? null : errors.cover ? errors.cover.msg : null %></p>
+                        </div>
+                        <div class="section col-12 col-md-6">
+                            <label for="isbn">Código ISBN:</label>
+                            <input type="text" class="input" name="isbn" value='<%= typeof old == "undefined" ? book.isbn : old.isbn%>'>
+                            <p class="error"><%= typeof errors == 'undefined' ? null : errors.isbn ? errors.isbn.msg : null %></p>
+                        </div>
+                        <div class="section col-12 col-md-6">
+                            <label for="price">Precio:</label>
+                            <input type="number" class="input" name="price" value='<%= typeof old == "undefined" ? book.price : old.price%>'>
+                            <p class="error"><%= typeof errors == 'undefined' ? null : errors.price ? errors.price.msg : null %></p>
+                        </div>
+                        <div class="section col-12">
+                            <label for="description">Descripción:</label>
+                            <textarea name="description" cols="30" rows="5"><%= typeof old == "undefined" ? book.description : old.description%></textarea>
+                            <p class="error"><%= typeof errors == 'undefined' ? null : errors.description ? errors.description.msg : null %></p>
+                        </div>
+                        <div class="section col-12">
+                            <label for="image">Añadir imágen</label>
+                            <input type="file" name="image">
+                            <p class="error"><%= typeof errors == 'undefined' ? null : errors.image ? errors.image.msg : null %></p>
+                        </div>
+                        <div class="section col-12 col-md-3">
+                            <button type="submit">Guardar</button>
+                        </div>
+                    </div>
+                </div>               
+            </form>
+        </div> 
+    </div>
+    
+    <%- include('partials/footer') %>
+    <script src="/js/api.js"></script>
+    
+</body>
+</html>
+
+
+
+
